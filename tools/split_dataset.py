@@ -3,30 +3,45 @@
 @Date: 2022/5/29  10:44
 @github: https://github.com/HuKai97
 """
+
 import os
 import random
-
 import shutil
-from shutil import copy2
-trainfiles = os.listdir(r"K:\MyProject\datasets\ccpd\new\ccpd_2019\base")  #（图片文件夹）
+
+image_raw_dir = "Z:/CCPD/raw"
+trainfiles = os.listdir(image_raw_dir)  # （图片文件夹）
 num_train = len(trainfiles)
-print("num_train: " + str(num_train) )
+print("num_train: " + str(num_train))
 index_list = list(range(num_train))
 print(index_list)
 random.shuffle(index_list)  # 打乱顺序
 num = 0
-trainDir = r"K:\MyProject\datasets\ccpd\new\ccpd_2019\train"   #（将图片文件夹中的6份放在这个文件夹下）
-validDir = r"K:\MyProject\datasets\ccpd\new\ccpd_2019\val"     #（将图片文件夹中的2份放在这个文件夹下）
-detectDir = r"K:\MyProject\datasets\ccpd\new\ccpd_2019\test"   #（将图片文件夹中的2份放在这个文件夹下）
+
+image_base_dir = "Z:/CCPD/det/images"
+
+trainDir = os.path.join(image_base_dir, "train")
+validDir = os.path.join(image_base_dir, "val")
+testDir = os.path.join(image_base_dir, "test")
+
+# 删除目录
+shutil.rmtree(image_base_dir, ignore_errors=True)
+
+# 新建目录
+os.makedirs(image_base_dir, exist_ok=True)
+os.makedirs(trainDir, exist_ok=True)
+os.makedirs(validDir, exist_ok=True)
+os.makedirs(testDir, exist_ok=True)
+
 for i in index_list:
-    fileName = os.path.join(r"K:\MyProject\datasets\ccpd\new\ccpd_2019\base", trainfiles[i])  #（图片文件夹）+图片名=图片地址
-    if num < num_train*0.7:  # 7:1:2
-        print(str(fileName))
-        copy2(fileName, trainDir)
-    elif num < num_train*0.8:
-        print(str(fileName))
-        copy2(fileName, validDir)
+    src_file_path = os.path.join(image_raw_dir, trainfiles[i])
+
+    if num < num_train * 0.7:  # 7:1:2
+        print(str(src_file_path))
+        shutil.copy2(src_file_path, os.path.join(trainDir, trainfiles[i]))
+    elif num < num_train * 0.8:
+        print(str(src_file_path))
+        shutil.copy2(src_file_path, os.path.join(validDir, trainfiles[i]))
     else:
-        print(str(fileName))
-        copy2(fileName, detectDir)
+        print(str(src_file_path))
+        shutil.copy2(src_file_path, os.path.join(testDir, trainfiles[i]))
     num += 1
