@@ -67,13 +67,12 @@ def get_parser():
     parser.add_argument('--num_workers', default=0, type=int, help='Number of workers used in dataloading')
     parser.add_argument('--cuda', default=True, type=bool, help='Use cuda to train model')
     parser.add_argument('--resume_epoch', default=0, type=int, help='resume iter for retraining')
-    parser.add_argument('--save_interval', default=500, type=int, help='interval for save model state dict')
+    parser.add_argument('--save_interval', default=10000, type=int, help='interval for save model state dict')
     parser.add_argument('--test_interval', default=500, type=int, help='interval for evaluate')
     parser.add_argument('--momentum', default=0.9, type=float, help='momentum')
     parser.add_argument('--weight_decay', default=2e-5, type=float, help='Weight decay for SGD')
     parser.add_argument('--lr_schedule', default=[20, 40, 60, 80, 100], help='schedule for learning rate.')
-    parser.add_argument('--save_folder', default=r'../tmp/runs/',
-                        help='Location to save checkpoint models')
+    parser.add_argument('--save_folder', default='/home/ye/CODE/MY/YOLOv5-LPRNet-Licence-Recognition/tmp/runs/', help='Location to save checkpoint models')
     parser.add_argument('--pretrained_model', default='', help='no pretrain')
 
     args = parser.parse_args()
@@ -275,4 +274,6 @@ def Greedy_Decode_Eval(Net, datasets, args):
 
 
 if __name__ == "__main__":
+    # export PYTHONUNBUFFERED=1
+    # nohup python tools/train_lprnet.py &
     train()

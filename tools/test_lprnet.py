@@ -21,6 +21,10 @@ import torch
 import time
 import cv2
 import os
+import sys
+
+curr_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.abspath(os.path.join(curr_dir, "..")))
 
 from models.LPRNet import CHARS, LPRNet
 from utils.load_lpr_data import LPRDataLoader
@@ -37,7 +41,7 @@ def get_parser():
     parser.add_argument('--num_workers', default=0, type=int, help='Number of workers used in dataloading')
     parser.add_argument('--cuda', default=True, type=bool, help='Use cuda to train model')
     parser.add_argument('--show', default=False, type=bool, help='show test image and its predict result or not.')
-    parser.add_argument('--pretrained_model', default=r'K:\MyProject\YOLOv5-LPRNet-Licence-Recognition\weights\lprnet_best.pth', help='pretrained base model')
+    parser.add_argument('--pretrained_model', default='/home/ye/CODE/MY/YOLOv5-LPRNet-Licence-Recognition/tmp/runs/lprnet-pretrain.pth', help='pretrained base model')
 
     args = parser.parse_args()
 
