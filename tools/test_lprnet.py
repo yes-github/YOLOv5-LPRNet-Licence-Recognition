@@ -29,7 +29,7 @@ from utils.load_lpr_data import LPRDataLoader
 def get_parser():
     parser = argparse.ArgumentParser(description='parameters to train net')
     parser.add_argument('--img_size', default=[94, 24], help='the image size')
-    parser.add_argument('--test_img_dirs', default=r"K:\MyProject\datasets\ccpd\rec\test", help='the test images path')
+    parser.add_argument('--test_img_dirs', default="/home/ye/CODE/MY/YOLOv5-LPRNet-Licence-Recognition/tmp/datasets/ccpd/rec/test", help='the test images path')
     parser.add_argument('--dropout_rate', default=0, help='dropout rate.')
     parser.add_argument('--lpr_max_len', default=8, help='license plate number max length.')
     parser.add_argument('--test_batch_size', default=100, help='testing batch size.')

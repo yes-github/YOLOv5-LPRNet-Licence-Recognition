@@ -32,7 +32,12 @@
 
 
 ## 二、数据集下载
-直接在这里下载官方CCPD数据即可：[detectRecog/CCPD](https://github.com/detectRecog/CCPD) 
+- [第三方CCPD数据（满速）](https://github.com/detectRecog/CCPD)
+   - [2021黄牌](https://aistudio.baidu.com/datasetdetail/101671)
+   - [2020绿牌](https://aistudio.baidu.com/datasetdetail/101595)
+   - [2019蓝牌](https://aistudio.baidu.com/datasetdetail/101613)
+- 官方CCPD数据：[detectRecog/CCPD](https://github.com/detectRecog/CCPD) 
+
 
 ## 三、检测模型性能
 model|img_size|epochs|mAP_0.5|mAP_0.5:0.95|size

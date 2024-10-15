@@ -17,6 +17,10 @@ import argparse
 import torch
 import time
 import os
+import sys
+
+curr_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.abspath(os.path.join(curr_dir, "..")))
 
 from models.LPRNet import LPRNet, CHARS
 from utils.load_lpr_data import LPRDataLoader
@@ -52,8 +56,8 @@ def get_parser():
     parser = argparse.ArgumentParser(description='parameters to train net')
     parser.add_argument('--max_epoch', default=100, help='epoch to train the network')
     parser.add_argument('--img_size', default=[94, 24], help='the image size')
-    parser.add_argument('--train_img_dirs', default=r"K:\MyProject\datasets\ccpd\rec\train", help='the train images path')
-    parser.add_argument('--test_img_dirs', default=r"K:\MyProject\datasets\ccpd\rec\val", help='the test images path')
+    parser.add_argument('--train_img_dirs', default="/home/ye/CODE/MY/YOLOv5-LPRNet-Licence-Recognition/tmp/datasets/ccpd/rec/train", help='the train images path')
+    parser.add_argument('--test_img_dirs', default="/home/ye/CODE/MY/YOLOv5-LPRNet-Licence-Recognition/tmp/datasets/ccpd/rec/val", help='the test images path')
     parser.add_argument('--dropout_rate', default=0.5, help='dropout rate.')
     parser.add_argument('--learning_rate', default=0.01, help='base value of learning rate.')
     parser.add_argument('--lpr_max_len', default=8, help='license plate number max length.')
@@ -68,7 +72,7 @@ def get_parser():
     parser.add_argument('--momentum', default=0.9, type=float, help='momentum')
     parser.add_argument('--weight_decay', default=2e-5, type=float, help='Weight decay for SGD')
     parser.add_argument('--lr_schedule', default=[20, 40, 60, 80, 100], help='schedule for learning rate.')
-    parser.add_argument('--save_folder', default=r'../runs',
+    parser.add_argument('--save_folder', default=r'../tmp/runs/',
                         help='Location to save checkpoint models')
     parser.add_argument('--pretrained_model', default='', help='no pretrain')
 
@@ -85,7 +89,7 @@ def collate_fn(batch):
         imgs.append(torch.from_numpy(img))
         labels.extend(label)
         lengths.append(length)
-    labels = np.asarray(labels).flatten().astype(np.int)
+    labels = np.asarray(labels).flatten().astype(np.int_)
     return (torch.stack(imgs, 0), torch.from_numpy(labels), lengths)
 
 def train():
