@@ -65,3 +65,5 @@ LPRNet| test | 100 | 94.30% | 1.7M
 3. 模型方面，可不可以加一些提高图像分辨率的算法，在检测到车牌区域位置，先提高车牌区域分辨率，再进行识别。
 4. 模型方面，可不可以加一些图片矫正的算法，在检测到车牌区域位置，先矫正车牌图片，再进行识别。
 
+## 七、参考资料
+- [LPRNet: License Plate Recognition via Deep Neural Networks](https://arxiv.org/pdf/1806.10447v1)

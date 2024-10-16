@@ -6,17 +6,20 @@
 """
 
 import os
+from loguru import logger
 import random
 from shutil import copy2
 
+curr_dir = os.path.dirname(os.path.abspath(__file__))
+# sys.path.append(os.path.abspath(os.path.join(curr_dir, "..")))
+
 # 复制5w张图片
 # find CCPD/raw/CCPD2019/ccpd_base -type f | head -n 50000 | xargs -I {} cp {} datasets/ccpd/raw/base/
-
-base_dir = "/home/ye/CODE/MY/YOLOv5-LPRNet-Licence-Recognition/tmp/datasets/ccpd/raw"
-
+base_dir = os.path.abspath(os.path.join(curr_dir,"..", "tmp/datasets/brazil/rec"))
 trainfiles = os.listdir(os.path.join(base_dir, "base"))  # （图片文件夹）
+
 num_train = len(trainfiles)
-print("num_train: " + str(num_train))
+logger.info("num_train: " + str(num_train))
 index_list = list(range(num_train))
 # print(index_list)
 random.shuffle(index_list)  # 打乱顺序
@@ -38,3 +41,5 @@ for i in index_list:
         # print(str(fileName))
         copy2(fileName, detectDir)
     num += 1
+
+logger.info("== END ==")
